@@ -1,0 +1,105 @@
+<?php include('header.php'); ?>
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>เพิ่มข้อมูลตารางรายการตารางเวลาเดินรถ </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+
+                        
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="carservice_id">หมายเลขรถ<span class="required">:</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="carservice_id" name="carservice_id" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timeable_id">เวลาที่เดินรถ<span class="required">:</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="datetime-local" id="timeable_id" name="timeable_id" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timetable_in">เวลาที่รถเข้า<span class="required">:</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="datetime-local" id="timetable_in" name="timetable_in" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timetable_out">เวลาที่รถจะออก<span class="required">:</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="datetime-local" id="timetable_out" name="timetable_out" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="timetable_arrive">เวลาที่จะถึง<span class="required">:</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="datetime-local" id="timetable_arrive	" name="timetable_arrive" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="station_id	">รหัสสถานี<span class="required">:</span> </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="station_id	" name="gstation_id	" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="submit" name="submit" class="btn btn-success">บันทึก</button>
+                                <button type="reset" name="reset" class="btn btn-danger">ยกเลิก</button>
+                            </div>
+                        </div>
+                    </form>
+                    <?php
+                    if (isset($_POST['submit'])) {
+                        $carservice_id = $_POST['carservice_id'];
+                        $timeable_id = $_POST['timetable_id'];
+                        $timetable_date = $_POST['timetable_date'];
+                        $timetable_in = $_POST['timetable_in'];
+                        $timetable_out = $_POST['timetable_out'];
+                        $timetable_arrive = $_POST['timetable_arrive'];
+                        $station_id	 = $_POST['station_id	'];
+
+                        $sql = " insert into tb_timetable(carservice_id,timetable_id,timetable_date,timetable_in,timetable_out, timetable_arrive,station_id	)";
+                        $sql .= " values ('$carservice_id','$timetable_id','$timetable_date','$timetable_in','$timetable_out','$timetable_arrive','$station_id	')";
+                        if ($cls_conn->write_base($sql) == true) {
+                            echo $cls_conn->show_message('บันทึกข้อมูลสำเร็จ');
+                            echo $cls_conn->goto_page(1, 'show_timetable.php');
+                        } else {
+                            echo $cls_conn->show_message('บันทึกข้อมูลไม่สำเร็จ');
+                            echo $sql;
+                        }
+                    }
+
+                    ?>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php include('footer.php'); ?>
